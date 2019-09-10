@@ -39,7 +39,8 @@ cflags = ""
 ZED_SDK_MAJOR = "2"
 ZED_SDK_MINOR = "8"
 
-CUDA_PATH = os.environ.get('CUDA_PATH', "/usr/local/cuda")
+CUDA_PATH = os.environ.get('CUDA_PATH', '/usr/local/cuda')
+ZED_PATH = os.environ.get('ZED_PATH', '/usr/local/zed')
 
 def check_zed_sdk_version_private(file_path):
     with open(file_path, "r") as myfile:
@@ -112,18 +113,17 @@ if sys.platform == "win32":
 
         libs = ["sl_core64", "sl_zed64"]
 elif "linux" in sys.platform:
-    zed_path = "/usr/local/zed"
-    if not os.path.isdir(zed_path):
+    if not os.path.isdir(ZED_PATH):
         print("Error: you must install the ZED SDK.")
     elif not os.path.isdir(CUDA_PATH):
         print("Error: you must install Cuda.")
     else:
-        check_zed_sdk_version(zed_path+"/include")
+        check_zed_sdk_version(ZED_PATH+"/include")
         incDirs = [numpy.get_include(),
-                   zed_path + "/include",
+                   ZED_PATH + "/include",
                    CUDA_PATH + "/include"]
 
-        libDirs = [numpy.get_include(), zed_path + "/lib",
+        libDirs = [numpy.get_include(), ZED_PATH + "/lib",
                    CUDA_PATH + "/lib64"]
 
         libs = ["sl_core", "sl_zed"]
