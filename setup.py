@@ -39,7 +39,7 @@ cflags = ""
 ZED_SDK_MAJOR = "2"
 ZED_SDK_MINOR = "8"
 
-cuda_path = "/usr/local/cuda"
+CUDA_PATH = os.environ.get('CUDA_PATH', "/usr/local/cuda")
 
 def check_zed_sdk_version_private(file_path):
     with open(file_path, "r") as myfile:
@@ -69,7 +69,7 @@ def check_zed_sdk_version(file_path):
         check_zed_sdk_version_private(file_path_prior_23)
     except AttributeError:
         check_zed_sdk_version_private(file_path_)
-   
+
 def clean_cpp():
     if os.path.isfile("pyzed/camera.cpp"):
         os.remove("pyzed/camera.cpp")
@@ -115,23 +115,23 @@ elif "linux" in sys.platform:
     zed_path = "/usr/local/zed"
     if not os.path.isdir(zed_path):
         print("Error: you must install the ZED SDK.")
-    elif not os.path.isdir(cuda_path):
+    elif not os.path.isdir(CUDA_PATH):
         print("Error: you must install Cuda.")
     else:
         check_zed_sdk_version(zed_path+"/include")
         incDirs = [numpy.get_include(),
                    zed_path + "/include",
-                   cuda_path + "/include"]
+                   CUDA_PATH + "/include"]
 
         libDirs = [numpy.get_include(), zed_path + "/lib",
-                   cuda_path + "/lib64"]
+                   CUDA_PATH + "/lib64"]
 
         libs = ["sl_core", "sl_zed"]
 
         cflags = ["-std=c++11", "-Wno-reorder", "-Wno-deprecated-declarations", "-Wno-cpp", "-O3"]
 else:
     print ("Unknown system.platform: %s  Installation failed, see setup.py." % sys.platform)
-    exit(1)    
+    exit(1)
 
 print ("compilation flags:", cflags)
 print ("include dirs:", incDirs)
