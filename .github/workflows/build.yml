@@ -28,7 +28,7 @@ jobs:
     - name: Build
       run: sudo /opt/hostedtoolcache/Python/3.7.4/x64/bin/python setup.py build
     - name: Install
-      run: python setup.py install
+      run: sudo /opt/hostedtoolcache/Python/3.7.4/x64/bin/python python setup.py install
   test:
       runs-on: ubuntu-latest
       needs: Build
