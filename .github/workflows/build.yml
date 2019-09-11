@@ -26,7 +26,7 @@ jobs:
     - name: Install Requirements
       run: |
         pip install -r requirements.txt
-        ls -l /usr/local/lib/python3.7/dist-packages
+        ls -l /usr/local/lib
         ls -l ~/.local/lib/python3.7/site-packages
     - name: Build
       run: sudo python setup.py build
