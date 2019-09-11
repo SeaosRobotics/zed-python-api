@@ -13,10 +13,12 @@ jobs:
       run: |
         wget "https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux"
         sudo sh cuda_10.0.130_410.48_linux -silent -toolkit
+        ls -l /usr/local
     - name: Install ZED SDK
       run: |
         wget "https://download.stereolabs.com/zedsdk/2.8/ubuntu18"
         sudo sh ubuntu18 --quiet -- silent
+        ls -l /usr/local
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
