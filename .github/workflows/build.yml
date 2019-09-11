@@ -24,12 +24,9 @@ jobs:
     - name: Upgrade PIP
       run: python -m pip install --upgrade pip
     - name: Install Requirements
-      run: |
-        pip install -r requirements.txt
-        ls -l /usr/local/lib
-        ls -l ~/.local/lib/python3.7/site-packages
+      run: pip install -r requirements.txt
     - name: Build
-      run: sudo python setup.py build
+      run: sudo /opt/hostedtoolcache/Python/3.7.4/x64/bin/python setup.py build
     - name: Install
       run: python setup.py install
   test:
