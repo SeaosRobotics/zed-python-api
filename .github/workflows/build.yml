@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  Env:
+  Build:
     runs-on: ubuntu-latest
     steps:
     - name: Install CUDA
@@ -16,11 +16,6 @@ jobs:
         wget "https://download.stereolabs.com/zedsdk/2.8/ubuntu18"
         sudo sh ubuntu18 --quiet -- silent
         ls -l /usr/local
-  Build:
-    runs-on: ubuntu-latest
-    needs: Env
-    steps:
-    - uses: Env
     - uses: actions/checkout@v1
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
